@@ -1,18 +1,15 @@
 module MyEnumerable
-    def all? (data)
-  
-  puts "working"
-     true  
-    end
-    def any? ()
-    
-      true
-    end
-    def filter ()
-  
-      []
-    end
-
-    module_function :all?, :any?,:filter
+  def all?
+    @list.each { |item| return false unless yield(item) }
+    true
   end
-  
+  def any?
+    @list.each { |item| return true if yield(item) }
+    false
+  end
+  def filter
+    arr = []
+    @list.each { |item| arr.push(item) if yield(item) }
+    arr
+  end
+end
